@@ -10,11 +10,11 @@ import org.firespeed.phpconfukuoka18.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), ExplorerFragment.OnFragmentInteractionListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var explorerFreagment: ExplorerFragment? = null
+    private var explorerFragment: ExplorerFragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        explorerFreagment = supportFragmentManager.findFragmentByTag(TAG_EXPLORER) as ExplorerFragment?
+        explorerFragment = supportFragmentManager.findFragmentByTag(TAG_EXPLORER) as ExplorerFragment?
 
         binding.activity = this
         binding.navigation.setOnNavigationItemSelectedListener { setFragment(it.itemId) }
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), ExplorerFragment.OnFragmentInteraction
     private fun setFragment(itemId: Int): Boolean =
             when (itemId) {
                 R.id.navigation_explorer ->
-                    setMainFragment(explorerFreagment
+                    setMainFragment(explorerFragment
                             ?: ExplorerFragment.newInstance(), TAG_EXPLORER)
 
                 else -> {
