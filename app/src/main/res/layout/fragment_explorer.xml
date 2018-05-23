@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
         <variable
@@ -75,11 +73,14 @@
                     android:text="@string/time_data" />
 
                 <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/addSchedule"
+                    android:onClick="@{fragment::addSchedule}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_margin="@dimen/itemMargin"
                     android:src="@drawable/ic_add_alarm" />
+
 
                 <TextView
                     style="@style/textLabel"
@@ -96,16 +97,26 @@
                     android:text="@string/location_data" />
 
                 <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btnStartNavigation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_margin="@dimen/itemMargin"
+                    android:onClick="@{fragment::startNavigation}"
                     android:src="@drawable/ic_navigation" />
                 <Button
                     android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:textColor="#fff"
-                    android:text="@string/attend"
+                    android:onClick="@{fragment::attendConference}"
+                    android:text="@string/attendConference"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
+                    android:textColor="#fff"
+                    android:onClick="@{fragment::attendParty}"
+                    android:text="@string/attendParty"
                     android:layout_height="wrap_content" />
 
 
