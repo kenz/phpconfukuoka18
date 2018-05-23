@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <variable
@@ -9,6 +10,7 @@
             type="org.firespeed.phpconfukuoka18.presentation.ExplorerFragment" />
 
     </data>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,12 +20,14 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/appBar"
+            android:theme="@style/AppTheme.AppBarOverlay"
             android:fitsSystemWindows="true">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:expandedTitleTextAppearance="@android:color/transparent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -32,53 +36,83 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    />
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:layout_collapseMode="pin" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:paddingTop="@dimen/appBar"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    style="@style/textLabel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="hogehoge" />
+                    android:text="@string/schedule"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    style="@style/textItem"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="hogehoge" />
+                    android:text="@string/date_data" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    style="@style/textItem"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="hogehoge" />
+                    android:text="@string/time_data" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/itemMargin"
+                    android:src="@drawable/ic_add_alarm" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    style="@style/textLabel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="hogehoge" />
+                    android:text="@string/location"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    style="@style/textItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_data" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/itemMargin"
+                    android:src="@drawable/ic_navigation" />
+                <Button
+                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
+                    android:textColor="#fff"
+                    android:text="@string/attend"
+                    android:layout_height="wrap_content" />
+
 
             </LinearLayout>
 
 
-        </ScrollView>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.constraint.ConstraintLayout>
-
+        </android.support.v4.widget.NestedScrollView>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -7,9 +7,37 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:colorButtonNormal">@color/colorPrimary</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="coordinatorLayoutStyle">@style/Widget.Design.CoordinatorLayout</item>
     </style>
 
+    <style name="AppTheme.ActionBarStyle" parent="Widget.AppCompat.Light.ActionBar">
+        <item name="titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/appBarText</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="textItem">
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginStart">@dimen/itemMargin</item>
+        <item name="android:layout_marginEnd">@dimen/itemMargin</item>
+    </style>
+
+    <style name="textLabel">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:layout_marginStart">@dimen/halfMargin</item>
+        <item name="android:layout_marginEnd">@dimen/halfMargin</item>
+    </style>
 </resources>

@@ -2,5 +2,7 @@
 <resources>
     <color name="colorPrimary">#ff321c</color>
     <color name="colorPrimaryDark">#df1317</color>
-    <color name="colorAccent">#fffc00</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="labelColor">#000000</color>
+    <color name="appBarText">#ffffff</color>
 </resources>
