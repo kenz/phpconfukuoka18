@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(),
                 R.id.navigation_favorite->
                     setMainFragment(favoriteFragment?: FavoriteFragment.newInstance(), TAG_FAVORITE, R.string.title_favorite)
                 R.id.navigation_about->
-                    setMainFragment(aboutFragment?: TimeTableFragment.newInstance(), TAG_ABOUT, R.string.title_about)
+                    setMainFragment(aboutFragment?: AboutFragment.newInstance(), TAG_ABOUT, R.string.title_about)
                 else -> {
                     false
                 }
