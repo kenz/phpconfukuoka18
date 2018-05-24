@@ -1,12 +1,16 @@
 package org.firespeed.phpconfukuoka18.presentation
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import io.reactivex.disposables.Disposable
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.databinding.ActivityMainBinding
+import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
 class MainActivity : AppCompatActivity(),
         ExplorerFragment.OnFragmentInteractionListener,
@@ -30,7 +34,25 @@ class MainActivity : AppCompatActivity(),
         binding.activity = this
         binding.navigation.setOnNavigationItemSelectedListener { setFragment(it.itemId) }
         binding.navigation.selectedItemId = savedInstanceState?.getInt(STATE_MENU) ?: R.id.navigation_explorer
+
     }
+
+    override fun onStart() {
+        super.onStart()
+        val sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel::class.java).apply {
+            getCurrent().observe(this@MainActivity, Observer {} )
+        }
+        disposable = sessionViewModel.getAll {  }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        disposable?.dispose()
+    }
+
+    private var disposable: Disposable? = null
+
+
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)

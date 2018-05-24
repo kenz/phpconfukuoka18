@@ -1,5 +1,7 @@
 package org.firespeed.phpconfukuoka18.presentation
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.databinding.FragmentTimeTableBinding
+import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
 
 class TimeTableFragment : Fragment() {
@@ -19,12 +22,22 @@ class TimeTableFragment : Fragment() {
         val binding: FragmentTimeTableBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_time_table, container, false)
         binding.fragment = this
         listener?.setSupportActionBar(binding.toolbar)
+
+        activity?.let {activity ->
+            ViewModelProviders.of(activity).get(SessionViewModel::class.java).apply {
+                getCurrent().observe(activity, Observer {
+
+                })
+            }
+        }
+
         return binding.root
     }
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
