@@ -11,7 +11,7 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
@@ -19,21 +19,37 @@
         android:paddingBottom="@dimen/halfMargin">
 
         <TextView
+            android:id="@+id/title"
             style="@style/sessionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
+            android:layout_toStartOf="@+id/checkBox"
             android:text="@{session.title}"
             tools:text="何故PHPなんですか" />
 
         <TextView
+            android:layout_below="@+id/title"
             style="@style/sessionLocation"
+            android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:gravity="start"
+            android:layout_toStartOf="@+id/checkBox"
             android:text="@{session.location}"
             tools:text="Fusicホール" />
 
-    </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkBox"
+            style="@style/hartCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/itemMargin"
+            android:layout_below="@+id/title"
+            android:checked="@{session.favorite}"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
 </layout>
