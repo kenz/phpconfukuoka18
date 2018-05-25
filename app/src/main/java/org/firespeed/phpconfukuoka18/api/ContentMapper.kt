@@ -12,6 +12,8 @@ class ContentMapper : Function<Document, List<Session>> {
         val rowList = response.select("#timetable tr")
         val roomList = ArrayList<String>()
 
+        var timeTableSort = 0
+        var id = 0L
         rowList.forEachIndexed { rowIndex, row ->
             if (rowIndex == 0) {
                 row.select("th").drop(1).forEach{
@@ -20,8 +22,6 @@ class ContentMapper : Function<Document, List<Session>> {
             } else {
 
                 var timeTable: String? = null
-                var timeTableSort = 0
-                var id = 0L
                 row.select("td").forEachIndexed { index, element ->
                     if (index == 0) {
                         timeTable = element.text()

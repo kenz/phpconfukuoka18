@@ -6,10 +6,13 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.firespeed.phpconfukuoka18.R
+import org.firespeed.phpconfukuoka18.adapter.TimeTableAdapter
 import org.firespeed.phpconfukuoka18.databinding.FragmentTimeTableBinding
 import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
@@ -23,9 +26,19 @@ class TimeTableFragment : Fragment() {
         binding.fragment = this
         listener?.setSupportActionBar(binding.toolbar)
 
+        binding.list.layoutManager = LinearLayoutManager(context)
+        val adapter = TimeTableAdapter()
+        binding.list.adapter = adapter
+
+        val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        binding.list.addItemDecoration(itemDecoration)
+
         activity?.let {activity ->
             ViewModelProviders.of(activity).get(SessionViewModel::class.java).apply {
                 getCurrent().observe(activity, Observer {
+                    it?.let {
+                        adapter.setItem(it)
+                    }
 
                 })
             }

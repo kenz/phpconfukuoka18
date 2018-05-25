@@ -31,6 +31,20 @@
         <item name="android:layout_marginStart">@dimen/itemMargin</item>
         <item name="android:layout_marginEnd">@dimen/itemMargin</item>
     </style>
+    <style name="sessionTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:layout_marginTop">@dimen/halfMargin</item>
+        <item name="android:layout_marginStart">@dimen/itemMargin</item>
+        <item name="android:layout_marginEnd">@dimen/itemMargin</item>
+    </style>
+    <style name="sessionLocation">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/labelColor</item>
+        <item name="android:layout_marginBottom">@dimen/halfMargin</item>
+        <item name="android:layout_marginStart">@dimen/itemMargin</item>
+        <item name="android:layout_marginEnd">@dimen/itemMargin</item>
+    </style>
 
     <style name="textLabel">
         <item name="android:textSize">20sp</item>

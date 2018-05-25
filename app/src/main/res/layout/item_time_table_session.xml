@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="session"
+            type="org.firespeed.phpconfukuoka18.model.Session" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/halfMargin">
+
+        <TextView
+            style="@style/sessionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@{session.title}"
+            tools:text="何故PHPなんですか" />
+
+        <TextView
+            style="@style/sessionLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:gravity="start"
+            android:text="@{session.location}"
+            tools:text="Fusicホール" />
+
+    </LinearLayout>
+</layout>
