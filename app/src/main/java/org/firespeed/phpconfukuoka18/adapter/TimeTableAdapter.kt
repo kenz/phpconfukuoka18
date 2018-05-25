@@ -1,15 +1,14 @@
 package org.firespeed.phpconfukuoka18.adapter
 
 import android.databinding.ViewDataBinding
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import org.firespeed.phpconfukuoka18.databinding.ItemTimeTableSessionBinding
 import org.firespeed.phpconfukuoka18.databinding.ItemTimeTableTimeBinding
 import org.firespeed.phpconfukuoka18.model.Session
 import org.firespeed.phpconfukuoka18.model.Time
+import java.util.*
 
 class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>>() {
 
@@ -90,6 +89,21 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
 
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    fun getNowPosition(): Int {
+        val calendar = Calendar.getInstance()
+        val now = calendar.get(Calendar.HOUR_OF_DAY) * 100 + calendar.get(Calendar.MINUTE)
+        itemList.forEachIndexed { i, item ->
+            if (item is Time) {
+                item.getHHMM()?.let {
+                    if (it < now) {
+                        return@getNowPosition i
+                    }
+                }
+            }
+        }
+        return 0
     }
 
     companion object {

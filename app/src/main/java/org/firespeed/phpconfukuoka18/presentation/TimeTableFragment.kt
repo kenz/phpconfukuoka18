@@ -11,13 +11,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.firespeed.phpconfukuoka18.BR.session
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.adapter.TimeTableAdapter
 import org.firespeed.phpconfukuoka18.databinding.FragmentTimeTableBinding
 import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
-
+/**
+ * タイムテーブルの一覧
+ */
 class TimeTableFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
@@ -27,14 +28,24 @@ class TimeTableFragment : Fragment() {
         binding.fragment = this
         listener?.setSupportActionBar(binding.toolbar)
 
-        binding.list.layoutManager = LinearLayoutManager(context)
+
+        // タイムテーブルリストの準備
         val adapter = TimeTableAdapter()
+        val layoutManager = LinearLayoutManager(context)
+        binding.list.layoutManager = layoutManager
         binding.list.adapter = adapter
 
+        // 現在時刻へスクロール
+        binding.scrollNow.setOnClickListener {
+            binding.list.smoothScrollToPosition(adapter.getNowPosition())
+        }
+
+        // 罫線
         val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         binding.list.addItemDecoration(itemDecoration)
 
         activity?.let {activity ->
+            // セッションの一覧はViewModel経由で取得する
             val sessionViewModel = ViewModelProviders.of(activity).get(SessionViewModel::class.java).apply {
                 getCurrent().observe(this@TimeTableFragment, Observer {
                     it?.let {
@@ -44,10 +55,10 @@ class TimeTableFragment : Fragment() {
                 })
             }
 
-            adapter.favoriteListener = {session, checked ->
+            adapter.favoriteListener = { session, checked ->
                 sessionViewModel.favorite(session, checked)
             }
-            adapter.sessionClickListener = {session ->
+            adapter.sessionClickListener = { session ->
                 SessionDetailDialogFragment.newInstance(session).show(childFragmentManager,TAG_TIME_TABLE)
             }
         }
