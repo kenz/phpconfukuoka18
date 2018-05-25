@@ -6,4 +6,6 @@
     <color name="labelColor">#000000</color>
     <color name="appBarText">#ffffff</color>
     <color name="colorFavorite">#FF4081</color>
+    <color name="link">#FF4081</color>
+    <color name="defaultText">#3e3e3e</color>
 </resources>

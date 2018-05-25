@@ -117,16 +117,6 @@ PHPと一緒にエンジニア人生を歩んできたと行っても過言で�
                     app:layout_constraintTop_toBottomOf="@+id/lblSessionContent"
                     tools:text="○○ ○○" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@{session.twitter}"
-                    app:layout_constraintStart_toEndOf="@+id/lblSpeaker"
-                    app:layout_constraintTop_toBottomOf="@+id/lblSessionContent"
-                    tools:text="@hogehoge" />
 
             </android.support.constraint.ConstraintLayout>
 

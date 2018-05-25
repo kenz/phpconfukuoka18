@@ -1,21 +1,18 @@
 package org.firespeed.phpconfukuoka18.presentation
 
-import android.app.Activity
 import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.databinding.DataBindingUtil
-import android.databinding.DataBindingUtil.setContentView
 import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatDialogFragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,12 +26,12 @@ class SessionDetailDialogFragment : AppCompatDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-   }
+    }
 
     private lateinit var binding: FragmentSessionDetailDialogBinding
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-         activity?.let { activity ->
+        activity?.let { activity ->
             sessionViewModel = ViewModelProviders.of(activity).get(SessionViewModel::class.java)
             sessionViewModel?.getCurrent()?.observe(this, Observer { result ->
 
@@ -60,6 +57,17 @@ class SessionDetailDialogFragment : AppCompatDialogFragment() {
         context?.let { context ->
             colorEnable = ContextCompat.getColor(context, R.color.colorFavorite)
             colorDisable = ContextCompat.getColor(context, R.color.colorAccent)
+            if (session.twitter == null) {
+                binding.lblSpeaker.setTextColor(ContextCompat.getColor(context, R.color.primary_text_default_material_light))
+
+            } else {
+                binding.lblSpeaker.setTextColor(ContextCompat.getColor(context, R.color.link))
+                binding.lblSpeaker.setOnClickListener {
+                    val uri = Uri.parse(session.twitter)
+                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+                }
+            }
+
         }
         binding.floatingActionButton.setOnClickListener {
             session.favorite = !session.favorite
