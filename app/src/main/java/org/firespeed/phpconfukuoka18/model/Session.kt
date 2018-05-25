@@ -43,8 +43,8 @@ class Session(
         val twitter: String?,
         @Column(indexed = true)
         @Nullable
-        @Setter("intermediate")
-        val intermediate: String?,
+        @Setter("level")
+        val level: String?,
         @Column(indexed = true)
         @Setter("favorite")
         var favorite: Boolean
@@ -57,7 +57,7 @@ class Session(
         if (body != fromApi.body) return true
         if (speaker != fromApi.speaker) return true
         if (twitter != fromApi.twitter) return true
-        if (intermediate != fromApi.intermediate) return true
+        if (level != fromApi.level) return true
         return false
     }
 
@@ -89,7 +89,7 @@ class Session(
                                     .body(fromApi.body)
                                     .speaker(fromApi.speaker)
                                     .twitter(fromApi.twitter)
-                                    .intermediate(fromApi.intermediate)
+                                    .level(fromApi.level)
                                     .execute()
 
                         }
