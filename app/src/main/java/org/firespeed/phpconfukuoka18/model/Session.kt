@@ -9,6 +9,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.firespeed.phpconfukuoka18.api.WebApi
+import java.io.Serializable
 
 @Table
 class Session(
@@ -16,7 +17,7 @@ class Session(
         @Setter("id")
         @PrimaryKey(autoincrement = true)
         @Column
-        val id: Long,
+        val id: Int,
         @Column
         @Setter("location")
         val location: String?,
@@ -48,7 +49,7 @@ class Session(
         @Column(indexed = true)
         @Setter("favorite")
         var favorite: Boolean
-) {
+) : Serializable {
     fun requireUpdate(fromApi: Session): Boolean {
         if (location != fromApi.location) return true
         if (timeTable != fromApi.timeTable) return true
@@ -61,7 +62,7 @@ class Session(
         return false
     }
 
-    fun updateFavorite():Single<Int>{
+    fun updateFavorite(): Single<Int> {
         val orma = OrmaHolder.ORMA
         return orma.updateSession().idEq(id).favorite(favorite).executeAsSingle()
     }
@@ -110,7 +111,7 @@ class Session(
             return fromApiList
         }
 
-        private fun fromDbEqId(orma: OrmaDatabase, id: Long): Session? = orma.selectFromSession().idEq(id).firstOrNull()
+        private fun fromDbEqId(orma: OrmaDatabase, id: Int): Session? = orma.selectFromSession().idEq(id).firstOrNull()
 
         fun fromDb(): Single<MutableList<Session>> {
             return OrmaHolder.ORMA.selectFromSession()

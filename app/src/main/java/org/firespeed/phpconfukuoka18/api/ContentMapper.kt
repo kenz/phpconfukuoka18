@@ -13,7 +13,7 @@ class ContentMapper : Function<Document, List<Session>> {
         val roomList = ArrayList<String>()
 
         var timeTableSort = 0
-        var id = 0L
+        var id = 1
         rowList.forEachIndexed { rowIndex, row ->
             if (rowIndex == 0) {
                 row.select("th").drop(1).forEach {

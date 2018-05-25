@@ -5,4 +5,5 @@
     <color name="colorAccent">#ffffff</color>
     <color name="labelColor">#000000</color>
     <color name="appBarText">#ffffff</color>
+    <color name="colorFavorite">#FF4081</color>
 </resources>

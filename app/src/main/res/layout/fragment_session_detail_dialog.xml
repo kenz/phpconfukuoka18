@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="org.firespeed.phpconfukuoka18.presentation.SessionDetailDialogFragment" />
+
+        <variable
+            name="session"
+            type="org.firespeed.phpconfukuoka18.model.Session" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/appbar"
+            android:layout_height="match_parent"
+            android:theme="@style/AppTheme">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/lblTitle"
+                    style="@style/textLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/itemMargin"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="224dp"
+                    android:text="@{session.title}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="何故PHPなんですか？" />
+
+                <TextView
+                    android:id="@+id/lblLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{session.location}"
+                    app:layout_constraintEnd_toStartOf="@+id/lblLevel"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/lblTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/lblTitle"
+                    tools:text="Fusicホール" />
+
+                <TextView
+                    android:id="@+id/lblLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{session.level}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblTitle"
+                    tools:text="初級 - For Beginner" />
+
+                <TextView
+                    android:id="@+id/lblSession"
+                    style="@style/textLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/itemMargin"
+                    android:layout_marginTop="@dimen/itemMargin"
+                    android:text="@string/session_content"
+                    android:textColor="#000"
+                    app:layout_constraintTop_toBottomOf="@+id/lblLevel" />
+
+                <TextView
+                    android:id="@+id/lblSessionContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{session.body}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblSession"
+                    tools:text="皆様PHP好きですか？
+私はPHPを触り続けてきました。
+PHPと一緒にエンジニア人生を歩んできたと行っても過言ではありません。
+そんな私がホントにこのままPHP書き続けて良いのか不安になることがありました。
+" />
+
+                <TextView
+
+                    android:id="@+id/lblSpeaker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{session.speaker}"
+                    app:layout_constraintStart_toStartOf="@+id/lblSessionContent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblSessionContent"
+                    tools:text="○○ ○○" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{session.twitter}"
+                    app:layout_constraintStart_toEndOf="@+id/lblSpeaker"
+                    app:layout_constraintTop_toBottomOf="@+id/lblSessionContent"
+                    tools:text="@hogehoge" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/itemMargin"
+            android:layout_margin="@dimen/itemMargin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/ic_favorite_border" />
+
+    </RelativeLayout>
+</layout>

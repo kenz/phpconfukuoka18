@@ -36,7 +36,7 @@ class TimeTableFragment : Fragment() {
 
         activity?.let {activity ->
             val sessionViewModel = ViewModelProviders.of(activity).get(SessionViewModel::class.java).apply {
-                getCurrent().observe(activity, Observer {
+                getCurrent().observe(this@TimeTableFragment, Observer {
                     it?.let {
                         adapter.setItem(it)
                     }
@@ -46,6 +46,9 @@ class TimeTableFragment : Fragment() {
 
             adapter.favoriteListener = {session, checked ->
                 sessionViewModel.favorite(session, checked)
+            }
+            adapter.sessionClickListener = {session ->
+                SessionDetailDialogFragment.newInstance(session).show(childFragmentManager,TAG_TIME_TABLE)
             }
         }
 
@@ -71,6 +74,7 @@ class TimeTableFragment : Fragment() {
     interface OnFragmentInteractionListener : ActivityInterface
 
     companion object {
+        const val TAG_TIME_TABLE = "timeTable"
         @JvmStatic
         fun newInstance() = TimeTableFragment()
     }

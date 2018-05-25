@@ -14,26 +14,25 @@ import org.firespeed.phpconfukuoka18.model.Time
 class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>>() {
 
     var favoriteListener: ((Session, Boolean) -> Unit)? = null
+    var sessionClickListener: ((Session) -> Unit)? = null
     private val itemList: MutableList<Any> = ArrayList()
-    fun setItem(sessionList:List<Session>){
+    fun setItem(sessionList: List<Session>) {
         val newList: MutableList<Any> = ArrayList()
-        var timeTable:Int? = null
-        sessionList.forEach{
-            if(timeTable!= it.timeTableSort){
+        var timeTable: Int? = null
+        sessionList.forEach {
+            if (timeTable != it.timeTableSort) {
                 timeTable = it.timeTableSort
                 newList.add(Time(it.timeTable))
             }
             newList.add(it)
         }
-        if(itemList.size!=newList.size){
+        if (itemList.size != newList.size) {
             itemList.clear()
             itemList.addAll(newList)
             notifyDataSetChanged()
-        }else{
-            itemList.forEachIndexed{index,element->
-                if(element != newList[index]){
-                    notifyItemChanged(index)
-                }
+        } else {
+            itemList.forEachIndexed { index, element ->
+                notifyItemChanged(index)
             }
         }
 
@@ -61,8 +60,8 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<ViewDataBinding> {
         val binding: ViewDataBinding = when (viewType) {
 
-            VIEW_TYPE_TIME-> ItemTimeTableTimeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            VIEW_TYPE_SESSION-> ItemTimeTableSessionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            VIEW_TYPE_TIME -> ItemTimeTableTimeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            VIEW_TYPE_SESSION -> ItemTimeTableSessionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             else -> throw IllegalStateException()
         }
         return BindingViewHolder(binding)
@@ -70,16 +69,21 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
 
     override fun onBindViewHolder(holder: BindingViewHolder<ViewDataBinding>, position: Int) {
         when (holder.binding) {
-            is ItemTimeTableTimeBinding-> {
+            is ItemTimeTableTimeBinding -> {
                 holder.binding.time = itemList[position] as Time
             }
-            is ItemTimeTableSessionBinding-> {
+            is ItemTimeTableSessionBinding -> {
                 val session = itemList[position] as Session
                 holder.binding.session = session
                 holder.binding.checkBox.setOnCheckedChangeListener { _, checked ->
-                    favoriteListener?.invoke(session, checked)
+                    if(session.favorite != checked) {
+                        favoriteListener?.invoke(session, checked)
+                    }
                 }
-           }
+                holder.binding.itemContent.setOnClickListener { _ ->
+                    sessionClickListener?.invoke(session)
+                }
+            }
         }
         holder.binding.executePendingBindings()
     }
