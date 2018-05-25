@@ -4,8 +4,10 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
+import android.util.Log
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.schedulers.NewThreadScheduler
+import io.reactivex.schedulers.Schedulers
 import org.firespeed.phpconfukuoka18.model.Session
 
 class SessionViewModel(application: Application) : AndroidViewModel(application) {
@@ -23,8 +25,15 @@ class SessionViewModel(application: Application) : AndroidViewModel(application)
             failedCallback?.invoke(it)
         })
     }
+    fun favorite(session:Session, favorite:Boolean){
+        session.favorite = favorite
 
+        val disposable = session.updateFavorite().subscribeOn(Schedulers.io()).subscribe({
+            val newValue = getCurrent().value
+            getCurrent().postValue(newValue)
+        },{
 
-
+        })
+    }
 
 }

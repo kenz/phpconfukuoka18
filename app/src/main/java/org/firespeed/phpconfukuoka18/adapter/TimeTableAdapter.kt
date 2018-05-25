@@ -13,7 +13,7 @@ import org.firespeed.phpconfukuoka18.model.Time
 
 class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>>() {
 
-
+    var favoriteListener: ((Session, Boolean) -> Unit)? = null
     private val itemList: MutableList<Any> = ArrayList()
     fun setItem(sessionList:List<Session>){
         val newList: MutableList<Any> = ArrayList()
@@ -74,7 +74,11 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
                 holder.binding.time = itemList[position] as Time
             }
             is ItemTimeTableSessionBinding-> {
-                holder.binding.session = itemList[position] as Session
+                val session = itemList[position] as Session
+                holder.binding.session = session
+                holder.binding.checkBox.setOnCheckedChangeListener { _, checked ->
+                    favoriteListener?.invoke(session, checked)
+                }
            }
         }
         holder.binding.executePendingBindings()

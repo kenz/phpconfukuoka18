@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.firespeed.phpconfukuoka18.BR.session
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.adapter.TimeTableAdapter
 import org.firespeed.phpconfukuoka18.databinding.FragmentTimeTableBinding
@@ -34,13 +35,17 @@ class TimeTableFragment : Fragment() {
         binding.list.addItemDecoration(itemDecoration)
 
         activity?.let {activity ->
-            ViewModelProviders.of(activity).get(SessionViewModel::class.java).apply {
+            val sessionViewModel = ViewModelProviders.of(activity).get(SessionViewModel::class.java).apply {
                 getCurrent().observe(activity, Observer {
                     it?.let {
                         adapter.setItem(it)
                     }
 
                 })
+            }
+
+            adapter.favoriteListener = {session, checked ->
+                sessionViewModel.favorite(session, checked)
             }
         }
 

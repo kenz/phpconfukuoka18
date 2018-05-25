@@ -61,6 +61,11 @@ class Session(
         return false
     }
 
+    fun updateFavorite():Single<Int>{
+        val orma = OrmaHolder.ORMA
+        return orma.updateSession().idEq(id).favorite(favorite).executeAsSingle()
+    }
+
     companion object {
         fun getAll(): Flowable<List<Session>> {
             return Single.concat(fromDb(), fromApi())
