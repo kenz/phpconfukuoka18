@@ -69,7 +69,7 @@ class Session(
 
     fun updateFavorite(): Single<Int> {
 
-        val notificationWork = OneTimeWorkRequest.Builder(NotificationWorker::class.java).setInitialDelay(3, TimeUnit.SECONDS).setInputData(NotificationWorker.setArgment(id)).build()
+        val notificationWork = OneTimeWorkRequest.Builder(NotificationWorker::class.java).setInitialDelay(3, TimeUnit.SECONDS).setInputData(NotificationWorker.setArgument(id)).build()
         WorkManager.getInstance().enqueue(notificationWork)
 
         val orma = OrmaHolder.ORMA

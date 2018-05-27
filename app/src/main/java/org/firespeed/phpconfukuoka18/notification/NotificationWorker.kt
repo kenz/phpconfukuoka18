@@ -17,6 +17,9 @@ class NotificationWorker : Worker() {
 
         val session = OrmaHolder.ORMA.selectFromSession().idEq(sessionId).singleOrNull()
                 ?: return WorkerResult.FAILURE
+        if (!session.favorite) {
+            return WorkerResult.SUCCESS
+        }
 
         val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val id = "chanel"
@@ -27,11 +30,11 @@ class NotificationWorker : Worker() {
 
             // Channelの取得と生成
             if (notificationManager.getNotificationChannel(id) == null) {
-                val mChannel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
-                mChannel.apply {
+                val channel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
+                channel.apply {
                     description = notifyDescription
                 }
-                notificationManager.createNotificationChannel(mChannel)
+                notificationManager.createNotificationChannel(channel)
             }
 
         }
@@ -41,14 +44,14 @@ class NotificationWorker : Worker() {
             setContentText(session.location)
             setContentTitle(applicationContext.getString(R.string.session_format, session.title))
         }.build()
-        notificationManager.notify(1, notification)
+        notificationManager.notify(0, notification)
 
         return WorkerResult.SUCCESS
     }
 
     companion object {
         const val ARGS_SESSION_ID = "sessionId"
-        fun setArgment(sessionId: Int): Data {
+        fun setArgument(sessionId: Int): Data {
             return Data.Builder().putInt(ARGS_SESSION_ID, sessionId).build()
         }
     }
