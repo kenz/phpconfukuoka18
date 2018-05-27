@@ -1,6 +1,7 @@
 package org.firespeed.phpconfukuoka18.model
 
 import android.support.annotation.Nullable
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.github.gfx.android.orma.annotation.Column
@@ -13,6 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import org.firespeed.phpconfukuoka18.api.WebApi
 import org.firespeed.phpconfukuoka18.notification.NotificationWorker
 import java.io.Serializable
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -67,10 +69,54 @@ class Session(
         return false
     }
 
-    fun updateFavorite(): Single<Int> {
+    private fun getTime(): Calendar? {
+        val time = timeTable
+        val split = time.split(":")
+        if (split.size < 2) {
+            return null
+        }
+        val cal = Calendar.getInstance()
+        return try {
+            cal.set(Calendar.YEAR, 2018)
+            cal.set(Calendar.MONTH, Calendar.JUNE)
+            cal.set(Calendar.DATE, 16)
+            cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(split[0]))
+            cal.set(Calendar.MINUTE, Integer.valueOf(split[1]))
+            cal.set(Calendar.SECOND, 0)
+            cal
+        } catch (_: NumberFormatException) {
+            null
+        }
 
-        val notificationWork = OneTimeWorkRequest.Builder(NotificationWorker::class.java).setInitialDelay(3, TimeUnit.SECONDS).setInputData(NotificationWorker.setArgument(id)).build()
-        WorkManager.getInstance().enqueue(notificationWork)
+    }
+
+    private fun getTimePreFive(): Calendar? {
+        val cal = getTime()
+        cal?.add(Calendar.MINUTE, -5)
+        return cal
+    }
+
+    fun updateFavorite(favorite: Boolean): Single<Int> {
+        this.favorite = favorite
+        if (favorite) {
+            val now = Calendar.getInstance().timeInMillis
+            val preFive = getTimePreFive()?.timeInMillis
+            preFive?.let {
+                if (now <= it) {
+                    val delay = it - now
+                    val notificationWork = OneTimeWorkRequest
+                            .Builder(NotificationWorker::class.java)
+                            .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                            .setInputData(NotificationWorker.setArgument(id))
+                            .addTag("TAG")
+                            .build()
+                    WorkManager.getInstance().enqueue(notificationWork)
+                    WorkManager.getInstance().beginUniqueWork(id.toString(), ExistingWorkPolicy.REPLACE, notificationWork)
+                }
+            }
+        } else {
+            WorkManager.getInstance().cancelUniqueWork(id.toString())
+        }
 
         val orma = OrmaHolder.ORMA
         return orma.updateSession().idEq(id).favorite(favorite).executeAsSingle()

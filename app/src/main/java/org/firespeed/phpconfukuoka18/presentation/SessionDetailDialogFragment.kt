@@ -33,6 +33,7 @@ class SessionDetailDialogFragment : AppCompatDialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         activity?.let { activity ->
             sessionViewModel = ViewModelProviders.of(activity).get(SessionViewModel::class.java)
+
             sessionViewModel?.getCurrent()?.observe(this, Observer { _ ->
 
             })

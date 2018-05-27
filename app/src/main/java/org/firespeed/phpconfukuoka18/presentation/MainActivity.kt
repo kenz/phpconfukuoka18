@@ -2,6 +2,8 @@ package org.firespeed.phpconfukuoka18.presentation
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.StringRes
@@ -10,6 +12,9 @@ import android.support.v7.app.AppCompatActivity
 import io.reactivex.disposables.Disposable
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.databinding.ActivityMainBinding
+import org.firespeed.phpconfukuoka18.isEventDate
+import org.firespeed.phpconfukuoka18.model.Session
+import org.firespeed.phpconfukuoka18.presentation.SessionDetailDialogFragment.Companion.TAG_SESSION_DETAIL
 import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
 
@@ -24,6 +29,7 @@ class MainActivity : AppCompatActivity(),
     private var timeTableFragment: TimeTableFragment? = null
     private var favoriteFragment: FavoriteFragment? = null
     private var aboutFragment: AboutFragment? = null
+    private var openDetailSessionId: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -31,18 +37,24 @@ class MainActivity : AppCompatActivity(),
         timeTableFragment = supportFragmentManager.findFragmentByTag(TAG_TIME_TABLE) as TimeTableFragment?
         favoriteFragment = supportFragmentManager.findFragmentByTag(TAG_FAVORITE) as FavoriteFragment?
         aboutFragment = supportFragmentManager.findFragmentByTag(TAG_ABOUT) as AboutFragment?
-
         binding.activity = this
         binding.navigation.setOnNavigationItemSelectedListener { setFragment(it.itemId) }
         binding.navigation.selectedItemId = savedInstanceState?.getInt(STATE_MENU) ?: R.id.navigation_explorer
-
-
+        if (savedInstanceState == null) {
+            if (isEventDate()) {
+                gotoTimetable()
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         val sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel::class.java).apply {
-            getCurrent().observe(this@MainActivity, Observer {})
+            getCurrent().observe(this@MainActivity, Observer {
+                it?.firstOrNull { it.id == openDetailSessionId }?.let {
+                    SessionDetailDialogFragment.newInstance(it).show(supportFragmentManager, TAG_SESSION_DETAIL)
+                }
+            })
         }
         disposable = sessionViewModel.getAll { }
     }
@@ -91,6 +103,14 @@ class MainActivity : AppCompatActivity(),
     }
 
     companion object {
+
+        fun createIntent(context: Context, openSession: Session): Intent = Intent(context, MainActivity::class.java).apply {
+            action = ACTION_OPEN_SESSION_DETAIL
+            putExtra(ARGS_OPEN_SESSION_ID, openSession.id)
+        }
+
+        private const val ACTION_OPEN_SESSION_DETAIL = "openSessionDetail"
+        private const val ARGS_OPEN_SESSION_ID = "openSessionId"
 
         private const val STATE_MENU = "menu"
         private const val TAG_EXPLORER = "explorer"

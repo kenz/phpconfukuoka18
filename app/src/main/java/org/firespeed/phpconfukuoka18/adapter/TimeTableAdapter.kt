@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import org.firespeed.phpconfukuoka18.databinding.ItemTimeTableSessionBinding
 import org.firespeed.phpconfukuoka18.databinding.ItemTimeTableTimeBinding
+import org.firespeed.phpconfukuoka18.isEventDate
 import org.firespeed.phpconfukuoka18.model.Session
 import org.firespeed.phpconfukuoka18.model.Time
 import java.util.*
@@ -94,21 +95,25 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
     }
 
     fun getNowPosition(): Int {
-        val calendar = Calendar.getInstance()
-        val now = calendar.get(Calendar.HOUR_OF_DAY) * 100 + calendar.get(Calendar.MINUTE)
-        var oldPosition = 0
-        itemList.forEachIndexed { i, item ->
-            if (item is Time) {
-                item.getHHMM()?.let {
-                    if (it <= now) {
-                        oldPosition = i
-                    } else {
-                        return@getNowPosition oldPosition
+        if (isEventDate()) {
+            val calendar = Calendar.getInstance()
+            val now = calendar.get(Calendar.HOUR_OF_DAY) * 100 + calendar.get(Calendar.MINUTE)
+            var oldPosition = 0
+            itemList.forEachIndexed { i, item ->
+                if (item is Time) {
+                    item.getHHMM()?.let {
+                        if (it <= now) {
+                            oldPosition = i
+                        } else {
+                            return@getNowPosition oldPosition
+                        }
                     }
                 }
             }
+            return oldPosition
+        } else {
+            return 0
         }
-        return 0
     }
 
     companion object {

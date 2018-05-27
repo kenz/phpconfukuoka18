@@ -26,8 +26,7 @@ class SessionViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun favorite(session:Session, favorite:Boolean){
-
-        val disposable = session.updateFavorite().subscribeOn(Schedulers.io()).subscribe({
+        val disposable = session.updateFavorite(favorite).subscribeOn(Schedulers.io()).subscribe({
             val newValue = getCurrent().value
             newValue?.first { it.id == session.id }?.favorite = favorite
             getCurrent().postValue(newValue)

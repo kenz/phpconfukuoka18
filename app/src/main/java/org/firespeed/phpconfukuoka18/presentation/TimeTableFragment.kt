@@ -14,6 +14,7 @@ import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.adapter.ScrollLayoutManager
 import org.firespeed.phpconfukuoka18.adapter.TimeTableAdapter
 import org.firespeed.phpconfukuoka18.databinding.FragmentTimeTableBinding
+import org.firespeed.phpconfukuoka18.isEventDate
 import org.firespeed.phpconfukuoka18.presentation.SessionDetailDialogFragment.Companion.TAG_SESSION_DETAIL
 import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
@@ -37,10 +38,11 @@ class TimeTableFragment : Fragment() {
         binding.list.layoutManager = layoutManager
         binding.list.adapter = adapter
 
+        binding.scrollNow.visibility = if (isEventDate()) View.VISIBLE else View.GONE
+
         // 現在時刻へスクロール
         binding.scrollNow.setOnClickListener {
             binding.list.smoothScrollToPosition(adapter.getNowPosition())
-//            layoutManager.scrollToPosition(adapter.getNowPosition())
         }
 
         // 罫線
@@ -53,6 +55,9 @@ class TimeTableFragment : Fragment() {
                 getCurrent().observe(this@TimeTableFragment, Observer {
                     it?.let {
                         adapter.setItem(it)
+                        binding.list.post({
+                            binding.list.smoothScrollToPosition(adapter.getNowPosition())
+                        })
                     }
 
                 })
