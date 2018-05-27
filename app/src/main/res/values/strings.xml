@@ -16,4 +16,6 @@
     <string name="event_name">PHPカンファレンス福岡2018</string>
     <string name="event_location">福岡市博多区博多駅前2–10-19　FFB ホール（福岡ファッションビル8階）</string>
     <string name="session_content">セッション内容：</string>
+    <string name="about_me">このアプリについて</string>
+    <string name="open_source_license">オープンソースライセンス</string>
 </resources>

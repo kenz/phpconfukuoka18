@@ -18,6 +18,10 @@ class AboutFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentAboutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         binding.fragment = this
+        binding.lnkOpenSourceLicense.setOnClickListener { _ ->
+            OpenSourceLicenseDialogFragment.newInstance().show(childFragmentManager, OpenSourceLicenseDialogFragment.TAG_OPEN_SOURCE_LICENSE)
+
+        }
         listener?.setSupportActionBar(binding.toolbar)
         return binding.root
     }
