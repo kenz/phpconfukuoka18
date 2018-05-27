@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">PHPカンファレンス福岡 2018(非公式)</string>
+    <string name="title_explorer">イベント概要</string>
+    <string name="title_time_table">タイムテーブル</string>
+    <string name="title_favorite">お気に入り</string>
+    <string name="title_about">このアプリについて</string>
+    <string name="schedule">スケジュール</string>
+    <string name="date_data">日付: 2018.6.16 [sat]</string>
+    <string name="time_data">時間: 10:00–18:00</string>
+    <string name="registerCalendar">カレンダーに登録</string>
+    <string name="attendConference">カンファレンス参加申込み</string>
+    <string name="attendParty">懇親会参加申込み</string>
+    <string name="location">場所</string>
+    <string name="location_data">福岡ファッションビル 8階 A・B・Cホール</string>
+    <string name="select_calender">カレンダーを選ぶ</string>
+    <string name="event_name">PHPカンファレンス福岡2018</string>
+    <string name="event_location">福岡市博多区博多駅前2–10-19　FFB ホール（福岡ファッションビル8階）</string>
+    <string name="session_content">セッション内容：</string>
+    <string name="about_me">このアプリについて</string>
+    <string name="about_me_text">このアプリは非公式なPHPカンファレンス福岡のアプリです。</string>
+    <string name="open_source_license">オープンソースライセンス</string>
+    <string name="version_number">バージョン番号</string>
+
+    <string name="session_format">%s 5分前です</string>
+    <string name="channel_title">セッション開始時の通知</string>
+    <string name="channel_description">セッション開始5分前に通知</string>
+</resources>
