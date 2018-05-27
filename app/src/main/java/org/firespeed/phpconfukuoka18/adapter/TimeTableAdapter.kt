@@ -94,11 +94,14 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
     fun getNowPosition(): Int {
         val calendar = Calendar.getInstance()
         val now = calendar.get(Calendar.HOUR_OF_DAY) * 100 + calendar.get(Calendar.MINUTE)
+        var oldPosition = 0
         itemList.forEachIndexed { i, item ->
             if (item is Time) {
                 item.getHHMM()?.let {
-                    if (it < now) {
-                        return@getNowPosition i
+                    if (it <= now) {
+                        oldPosition = i
+                    } else {
+                        return@getNowPosition oldPosition
                     }
                 }
             }
