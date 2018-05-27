@@ -17,5 +17,7 @@
     <string name="event_location">福岡市博多区博多駅前2–10-19　FFB ホール（福岡ファッションビル8階）</string>
     <string name="session_content">セッション内容：</string>
     <string name="about_me">このアプリについて</string>
+    <string name="about_me_text">このアプリは非公式なPHPカンファレンス福岡のアプリです。</string>
     <string name="open_source_license">オープンソースライセンス</string>
+    <string name="version_number">バージョン番号</string>
 </resources>

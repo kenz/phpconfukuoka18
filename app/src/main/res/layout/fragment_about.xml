@@ -52,12 +52,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/textLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/itemMargin"
-                    android:text="@string/about_me" />
 
                 <TextView
                     android:id="@+id/lnkOpenSourceLicense"
@@ -68,6 +62,32 @@
                     android:text="@string/open_source_license"
                     android:textColor="@color/link"
                     android:textStyle="bold" />
+
+                <TextView
+                    style="@style/textLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/itemMargin"
+                    android:text="@string/about_me" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/itemMargin"
+                    android:text="@string/about_me_text" />
+
+                <TextView
+                    style="@style/textLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/itemMargin"
+                    android:text="@string/version_number" />
+
+                <TextView
+                    android:id="@+id/versionNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/itemMargin" />
 
             </LinearLayout>
 

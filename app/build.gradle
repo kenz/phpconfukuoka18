@@ -9,14 +9,17 @@ android {
         applicationId "org.firespeed.phpconfukuoka18"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
+        versionCode 1000000
         multiDexEnabled true
-        versionName "1.0"
+        versionName "1.0.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            minifyEnabled true
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

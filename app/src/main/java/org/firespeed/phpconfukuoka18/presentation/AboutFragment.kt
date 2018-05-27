@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.firespeed.phpconfukuoka18.BuildConfig
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.databinding.FragmentAboutBinding
 
@@ -18,6 +19,7 @@ class AboutFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentAboutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         binding.fragment = this
+        binding.versionNumber.text = BuildConfig.VERSION_NAME
         binding.lnkOpenSourceLicense.setOnClickListener { _ ->
             OpenSourceLicenseDialogFragment.newInstance().show(childFragmentManager, OpenSourceLicenseDialogFragment.TAG_OPEN_SOURCE_LICENSE)
 
