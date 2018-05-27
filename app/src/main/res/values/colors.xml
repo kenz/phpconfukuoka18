@@ -7,5 +7,5 @@
     <color name="appBarText">#ffffff</color>
     <color name="colorFavorite">#FF4081</color>
     <color name="link">#FF4081</color>
-    <color name="defaultText">#3e3e3e</color>
+    <color name="defaultText">#de000000</color>
 </resources>

@@ -33,7 +33,7 @@ class SessionDetailDialogFragment : AppCompatDialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         activity?.let { activity ->
             sessionViewModel = ViewModelProviders.of(activity).get(SessionViewModel::class.java)
-            sessionViewModel?.getCurrent()?.observe(this, Observer { result ->
+            sessionViewModel?.getCurrent()?.observe(this, Observer { _ ->
 
             })
         }
@@ -58,7 +58,7 @@ class SessionDetailDialogFragment : AppCompatDialogFragment() {
             colorEnable = ContextCompat.getColor(context, R.color.colorFavorite)
             colorDisable = ContextCompat.getColor(context, R.color.colorAccent)
             if (session.twitter == null) {
-                binding.lblSpeaker.setTextColor(ContextCompat.getColor(context, R.color.primary_text_default_material_light))
+                binding.lblSpeaker.setTextColor(ContextCompat.getColor(context, R.color.defaultText))
 
             } else {
                 binding.lblSpeaker.setTextColor(ContextCompat.getColor(context, R.color.link))
@@ -99,10 +99,11 @@ class SessionDetailDialogFragment : AppCompatDialogFragment() {
 
     companion object {
         const val ARGS_SESSION_ID = "sessionId"
+        const val TAG_SESSION_DETAIL = "sessionDetail"
 
         /**
          * インスタンスの作成
-         * @param requestId 呼び出し元に返す値
+         * @param session 開くセッション
          */
         fun newInstance(session: Session): SessionDetailDialogFragment {
             val b = Bundle()

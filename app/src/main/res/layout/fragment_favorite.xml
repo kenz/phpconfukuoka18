@@ -47,12 +47,12 @@
 
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/scrollNow"
+            android:id="@+id/addFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/itemMargin"
-            android:src="@drawable/ic_access"
+            android:src="@drawable/ic_add"
             android:tint="@color/colorFavorite" />
 
     </android.support.design.widget.CoordinatorLayout>

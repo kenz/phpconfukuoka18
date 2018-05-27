@@ -81,6 +81,9 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
+    override fun gotoTimetable() {
+        binding.navigation.selectedItemId = R.id.navigation_time_table
+    }
     companion object {
 
         private const val STATE_MENU = "menu"

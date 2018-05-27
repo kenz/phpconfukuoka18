@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import org.firespeed.phpconfukuoka18.R
 import org.firespeed.phpconfukuoka18.adapter.TimeTableAdapter
 import org.firespeed.phpconfukuoka18.databinding.FragmentTimeTableBinding
+import org.firespeed.phpconfukuoka18.presentation.SessionDetailDialogFragment.Companion.TAG_SESSION_DETAIL
 import org.firespeed.phpconfukuoka18.viewmodel.SessionViewModel
 
 /**
@@ -59,7 +60,7 @@ class TimeTableFragment : Fragment() {
                 sessionViewModel.favorite(session, checked)
             }
             adapter.sessionClickListener = { session ->
-                SessionDetailDialogFragment.newInstance(session).show(childFragmentManager,TAG_TIME_TABLE)
+                SessionDetailDialogFragment.newInstance(session).show(childFragmentManager, TAG_SESSION_DETAIL)
             }
         }
 
@@ -85,7 +86,6 @@ class TimeTableFragment : Fragment() {
     interface OnFragmentInteractionListener : ActivityInterface
 
     companion object {
-        const val TAG_TIME_TABLE = "timeTable"
         @JvmStatic
         fun newInstance() = TimeTableFragment()
     }
