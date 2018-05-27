@@ -1,7 +1,9 @@
 package org.firespeed.phpconfukuoka18.presentation
 
 import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +24,10 @@ class AboutFragment : Fragment() {
         binding.versionNumber.text = BuildConfig.VERSION_NAME
         binding.lnkOpenSourceLicense.setOnClickListener { _ ->
             OpenSourceLicenseDialogFragment.newInstance().show(childFragmentManager, OpenSourceLicenseDialogFragment.TAG_OPEN_SOURCE_LICENSE)
-
+        }
+        binding.lblGithub.setOnClickListener {
+            val uri = Uri.parse(getString(R.string.git_hub_url))
+            startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
         listener?.setSupportActionBar(binding.toolbar)
         return binding.root

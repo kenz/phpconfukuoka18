@@ -75,6 +75,20 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/itemMargin"
                     android:text="@string/about_me_text" />
+                <TextView
+                    style="@style/textLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/itemMargin"
+                    android:text="@string/git_hub_label" />
+
+                <TextView
+                    android:id="@+id/lblGithub"
+                    android:layout_width="match_parent"
+                    android:text="@string/git_hub_url"
+                    android:textColor="@color/link"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/itemMargin" />
 
                 <TextView
                     style="@style/textLabel"

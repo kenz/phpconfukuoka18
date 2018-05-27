@@ -24,4 +24,6 @@
     <string name="session_format">%s is start after 5 after minutes.</string>
     <string name="channel_title">Session start notification.</string>
     <string name="channel_description">Notify at session start ago 5 minutes.</string>
+    <string name="git_hub_label" translatable="false">GitHub</string>
+    <string name="git_hub_url" translatable="false">https://github.com/kenz/phpconfukuoka18</string>
 </resources>
