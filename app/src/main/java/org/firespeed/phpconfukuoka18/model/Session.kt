@@ -1,6 +1,8 @@
 package org.firespeed.phpconfukuoka18.model
 
 import android.support.annotation.Nullable
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.github.gfx.android.orma.annotation.Column
 import com.github.gfx.android.orma.annotation.PrimaryKey
 import com.github.gfx.android.orma.annotation.Setter
@@ -9,7 +11,10 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.firespeed.phpconfukuoka18.api.WebApi
+import org.firespeed.phpconfukuoka18.notification.NotificationWorker
 import java.io.Serializable
+import java.util.concurrent.TimeUnit
+
 
 @Table
 class Session(
@@ -63,6 +68,10 @@ class Session(
     }
 
     fun updateFavorite(): Single<Int> {
+
+        val notificationWork = OneTimeWorkRequest.Builder(NotificationWorker::class.java).setInitialDelay(3, TimeUnit.SECONDS).setInputData(NotificationWorker.setArgment(id)).build()
+        WorkManager.getInstance().enqueue(notificationWork)
+
         val orma = OrmaHolder.ORMA
         return orma.updateSession().idEq(id).favorite(favorite).executeAsSingle()
     }

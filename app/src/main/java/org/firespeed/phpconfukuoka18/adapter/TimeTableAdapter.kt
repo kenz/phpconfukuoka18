@@ -31,7 +31,9 @@ class TimeTableAdapter : RecyclerView.Adapter<BindingViewHolder<ViewDataBinding>
             notifyDataSetChanged()
         } else {
             itemList.forEachIndexed { index, element ->
-                notifyItemChanged(index)
+                if (itemList[index] != element) {
+                    notifyItemChanged(index)
+                }
             }
         }
 

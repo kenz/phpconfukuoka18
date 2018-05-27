@@ -20,4 +20,8 @@
     <string name="about_me_text">このアプリは非公式なPHPカンファレンス福岡のアプリです。</string>
     <string name="open_source_license">オープンソースライセンス</string>
     <string name="version_number">バージョン番号</string>
+
+    <string name="session_format">%s 5分前です</string>
+    <string name="channel_title">セッション開始時の通知</string>
+    <string name="channel_description">セッション開始5分前に通知</string>
 </resources>

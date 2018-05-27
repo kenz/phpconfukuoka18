@@ -37,7 +37,7 @@ class WebApi {
 
     private fun loggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
         return loggingInterceptor
     }
 
