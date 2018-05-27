@@ -8,5 +8,4 @@ class BasicApp : Application() {
         super.onCreate()
         OrmaHolder.initialize(this)
     }
-
 }

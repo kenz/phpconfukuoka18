@@ -122,7 +122,7 @@ class Session(
 
         private fun fromDbEqId(orma: OrmaDatabase, id: Int): Session? = orma.selectFromSession().idEq(id).firstOrNull()
 
-        fun fromDb(): Single<MutableList<Session>> {
+        private fun fromDb(): Single<MutableList<Session>> {
             return OrmaHolder.ORMA.selectFromSession()
                     .orderByIdAsc()
                     .executeAsObservable()

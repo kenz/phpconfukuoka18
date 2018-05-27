@@ -12,6 +12,7 @@ import org.firespeed.phpconfukuoka18.model.OrmaHolder
 
 
 class NotificationWorker : Worker() {
+    @Suppress("DEPRECATION")
     override fun doWork(): Worker.WorkerResult {
         val sessionId = inputData.getInt(ARGS_SESSION_ID, 0)
 
