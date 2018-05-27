@@ -30,6 +30,7 @@ class TimeTableFragment : Fragment() {
         val binding: FragmentTimeTableBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_time_table, container, false)
         binding.fragment = this
         listener?.setSupportActionBar(binding.toolbar)
+        whenOpenScreen = savedInstanceState?.getBoolean(STATE_WHEN_OPEN_SCREEN) ?: true
 
 
         // タイムテーブルリストの準備
@@ -55,9 +56,12 @@ class TimeTableFragment : Fragment() {
                 getCurrent().observe(this@TimeTableFragment, Observer {
                     it?.let {
                         adapter.setItem(it)
-                        binding.list.post({
-                            binding.list.smoothScrollToPosition(adapter.getNowPosition())
-                        })
+                        if (whenOpenScreen) {
+                            whenOpenScreen = false
+                            binding.list.post({
+                                binding.list.smoothScrollToPosition(adapter.getNowPosition())
+                            })
+                        }
                     }
 
                 })
@@ -74,6 +78,11 @@ class TimeTableFragment : Fragment() {
         return binding.root
     }
 
+    private var whenOpenScreen = true
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(STATE_WHEN_OPEN_SCREEN, whenOpenScreen)
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -93,6 +102,7 @@ class TimeTableFragment : Fragment() {
     interface OnFragmentInteractionListener : ActivityInterface
 
     companion object {
+        private const val STATE_WHEN_OPEN_SCREEN = "whenOpenScreen"
         @JvmStatic
         fun newInstance() = TimeTableFragment()
     }
