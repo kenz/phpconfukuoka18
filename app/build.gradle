@@ -16,7 +16,6 @@ android {
     }
     buildTypes {
         debug{
-            // todo:proguard
             minifyEnabled false
         }
         release {
