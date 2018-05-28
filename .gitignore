@@ -20,3 +20,4 @@ proguard/
 app/build/
 .DS_Store
 *.jks
+bundle.aab
